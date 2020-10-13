@@ -16,13 +16,10 @@ Cuddlegeddon: Snugglepocalypse is the 2020 remake of the 2012 game Cuddlegeddon,
 
 ## Known Bugs
  
-* Attack (Space and LCTRL) does not work in build
-* Change Projectile does not work in build
-  * A, D for Player 1 
-  * RightArrow LeftArrow for Player2
+* Codep doesn't work
   
 
-#Unitypackage
+#Unitypackage - out of date
 https://drive.google.com/open?id=1ZkAmUNooxo3bc-oEaTimS1Hsek5PlfZf
 
 #Inputs  

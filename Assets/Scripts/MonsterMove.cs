@@ -21,6 +21,7 @@ public class MonsterMove : MonoBehaviour
     public GameObject healthBar;
     public GameObject followBar;
     int projDir;
+    public float bulletspeed = 0.5f;
 
     int chance;
     // Start is called before the first frame update
@@ -71,7 +72,7 @@ public class MonsterMove : MonoBehaviour
         GameObject bullet = Instantiate(projPrefab, new Vector3(this.transform.position.x + offset * projDir
             , this.transform.position.y + 0.5f, this.transform.position.z), Quaternion.identity);
 
-        float speed = bullet.GetComponent<Projectile>().speed;
+        float speed = bulletspeed ;
         if (projDir == -1)
         {
             bullet.GetComponent<SpriteRenderer>().flipX = true;

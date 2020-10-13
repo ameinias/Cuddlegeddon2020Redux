@@ -7,13 +7,13 @@ using UnityEngine.EventSystems;
 
 public class ChooseProjectile1Bliss : MonoBehaviour
 {
-    public List<ScriptableObject> projectiles;
+    public List<GameObject> projectiles;
     public int currentInt;
     int nextInt;
     int lastInt;
-    public ScriptableObject current;
-    public ScriptableObject next;
-    public ScriptableObject last;
+    public GameObject current;
+    public GameObject next;
+    public GameObject last;
     
     public RawImage currentImage;
     public RawImage lastImage;
@@ -58,7 +58,7 @@ public class ChooseProjectile1Bliss : MonoBehaviour
         UpdateProjectiles();
     } 
 
-int CycleScriptableList(int locInt, List<ScriptableObject> list)
+int CycleScriptableList(int locInt, List<GameObject> list)
     {
         if (locInt > list.Count-1)
         { locInt = 0; }

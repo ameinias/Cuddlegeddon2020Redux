@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.Numerics;
+using System.Runtime.CompilerServices;
 
 public class LevelTracker : MonoBehaviour
 {
@@ -140,6 +141,8 @@ public bool noTimer;
     public GameObject goodHeartFab;
     public GameObject badHeartparent;
     public GameObject goodHeartparent;
+    public List<string> goodText;
+    public List<string> badText;
 
 
     public static void TextJump(string text, string size)
@@ -603,8 +606,33 @@ public static AudioClip LevelBGMusic()
 
     public static void UpdateScore(string player, int damageValue)
     {
+        if (singleton.level != "coDep") { 
+        int rando = Random.Range(0, 5);
+        int textRando;
+            int choose = Random.Range(0, 3);
+            string textSize;
 
-   //     Debug.Log("Hit, trying to update score");
+
+            if (choose > 1) 
+            { textSize = "small";  } 
+            else { textSize = "big"; }
+
+
+            if (rando < 2) {
+            if (damageValue > 0)
+            {
+                textRando = Random.Range(0, singleton.goodText.Count);
+
+                LevelTracker.TextJump(singleton.goodText[textRando], textSize);
+            } else {
+
+                textRando = Random.Range(0, singleton.badText.Count);
+
+                    LevelTracker.TextJump(singleton.badText[textRando], textSize); }
+        }
+    }
+
+        //     Debug.Log("Hit, trying to update score");
         if (singleton.level == "vanilla")
         {
          //   Debug.Log("is vanilla");

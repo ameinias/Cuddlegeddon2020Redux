@@ -322,13 +322,11 @@ MonoBehaviour:
   blue: {fileID: 668064756}
   yellow: {fileID: 1498020585}
   both: {fileID: 706255618}
-  P1Held: 0
-  P2Held: 0
   canFire1: 0
   canFire2: 0
   coolDownTimer1: 0
   coolDownTimer2: 0
-  coolDown: 0.05
+  coolDown: 0.5
   startLoc: {fileID: 1880648125}
   rightPlace: 0
   endPosition: {x: 0, y: 0, z: 0}
@@ -336,13 +334,10 @@ MonoBehaviour:
   indexNode: 0
   movementSpeed: 3
   pressTimer: 0.8
-  sucesses: 0
   P1Press: 0
   P2Press: 0
   waitToFire1: 0
   waitToFire2: 0
-  CanFire1: 0
-  CanFire2: 0
   timeBetweenFires: 0.5
   hitSFX: {fileID: 8300000, guid: f3ac2a6fc247082499dec6e515ef7d94, type: 3}
   matchSFX:

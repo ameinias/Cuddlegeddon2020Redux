@@ -99,10 +99,10 @@ public class PlayerController : MonoBehaviour
             if (Input.GetButtonDown(fireKey))
             {
                 
-              //  Debug.Log("hit the fire button");
+                Debug.Log("hit the fire button");
                 if (canFire)
                 {
-                    LevelTracker.TextJump("elBlinko, P2: " + isP2, "big");
+                 //   LevelTracker.TextJump("elBlinko, P2: " + isP2, "big");
                     FireProjectile();
                     audioS.PlayOneShot(hitColdSFX);
                 }
@@ -120,12 +120,12 @@ public class PlayerController : MonoBehaviour
                 {
                     LastProjectile();
                     audioS.PlayOneShot(beep1SFX);
-                    LevelTracker.TextJump("change1, P2: " + isP2, "small");
+                  //  LevelTracker.TextJump("change1, P2: " + isP2, "small");
                 }
                 else if (Input.GetButtonDown(projDownKey))
                 {
                     NextProjectile();
-                    LevelTracker.TextJump("change2, P2: " + isP2, "small");
+                  //  LevelTracker.TextJump("change2, P2: " + isP2, "small");
                     audioS.PlayOneShot(beep2SFX);
                 }
             }
