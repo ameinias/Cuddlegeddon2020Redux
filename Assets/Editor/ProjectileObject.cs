@@ -2,9 +2,9 @@
 
 public class ProjectileObject : ScriptableObject
 {
-    public Sprite sprite;
-    public Texture menuImage;
+  //  public Sprite sprite;
+  //  public Texture menuImage;
 
-    public int value;
+   // public int value;
 
 }

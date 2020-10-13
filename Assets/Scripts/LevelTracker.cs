@@ -136,6 +136,11 @@ public bool noTimer;
     [Space(10)]
     public Text debugText;
 
+    public GameObject badHeartFab;
+    public GameObject goodHeartFab;
+    public GameObject badHeartparent;
+    public GameObject goodHeartparent;
+
 
     public static void TextJump(string text, string size)
     {
@@ -312,16 +317,89 @@ public static AudioClip LevelBGMusic()
     }
 
 
-   /// <summary>
-   /// //////////////////////////////////////////////STATRTS
-   /// </summary>
+    /// <summary>
+    /// //////////////////////////////////////////////STATRTS
+    /// </summary>
+    /// 
+
+    public List<string> Agree;
+    public List<string> Disagree;
+
+
+    void AnnounceGood()
+    {
+
+        int randomshout = Random.Range(0, Agree.Count);
+
+
+        TextJump(Agree[randomshout], "big");
+
+    }
+
+
+    void AnnounceBad()
+    {
+
+        int randomshout = Random.Range(0, Disagree.Count);
+
+
+        TextJump(Disagree[randomshout], "big");
+
+    }
+
+
 
     public static void CodepScore(bool win)
     {
-        if (win) { singleton.coDepWins++;
-            singleton.agreementText.text = "Agreements: " + singleton.coDepWins; }
+
+
+
+
+
+        if (win) { 
+            singleton.coDepWins++;
+           
+
+            GameObject newHeart = Instantiate(singleton.goodHeartFab);
+            newHeart.transform.SetParent(singleton.goodHeartparent.transform);
+
+            if (singleton.coDepWins > 9)
+            {
+                LevelTracker.TextJump("One more!", "big");
+            }
+            else if (singleton.coDepWins > 8)
+            {
+                LevelTracker.TextJump("just a few more", "big");
+            }
+            else
+            {
+                singleton.AnnounceGood();
+            }
+         //   singleton.agreementText.text = "Agreements: " + singleton.coDepWins; 
+
+
+
+        }
         else { singleton.coDepFail++;
-            singleton.disagreementText.text = "Disagreements: " + singleton.coDepFail;
+
+            GameObject newHeart = Instantiate(singleton.badHeartFab);
+           
+            newHeart.transform.SetParent(singleton.badHeartparent.transform);
+
+            // singleton.disagreementText.text = "Disagreements: " + singleton.coDepFail;
+
+            if (singleton.coDepFail > 12)
+            {
+                LevelTracker.TextJump("they're losing patience", "big");
+            } else if (singleton.coDepFail > 14)
+            {
+                LevelTracker.TextJump("NO MORE CHANCES", "big");
+            }
+            else
+            {
+                singleton.AnnounceBad();
+            }
+
         }
 
         if (singleton.coDepWins > 10) { singleton.CodepWinScreen.SetActive(true); GameManager.DisableControls(true); }
@@ -332,6 +410,12 @@ public static AudioClip LevelBGMusic()
             singleton.CoDepLoseScreen.SetActive(true);
         }
 }
+
+
+    void EndLevelCoDep() {
+        GameManager.DisableControls(true);
+        singleton.CoDepLoseScreen.SetActive(true);
+    }
 
     void Start()
     {
@@ -468,7 +552,7 @@ public static AudioClip LevelBGMusic()
 
         if (!GameManager.IsPaused())
         {
-
+            ;
 
             if (finishedVanilla == true)
             {
@@ -874,7 +958,7 @@ else { return "broken"; }
     }
 
 
-    public void EndLevelCoDep() { }
+
     public void BlissDefeated(string player)
     {
         //Time.timeScale = 0;

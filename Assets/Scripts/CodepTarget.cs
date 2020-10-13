@@ -3,6 +3,8 @@ using System.Collections.Generic;
 
 using UnityEngine;
 using CameraShake;
+using UnityEngine.UI;
+
 public class CodepTarget : MonoBehaviour
 {
 
@@ -46,6 +48,13 @@ public class CodepTarget : MonoBehaviour
 
     public HeadController P1Face;
     public HeadController P2Face;
+
+
+
+
+
+
+
 
 
     // Start is called before the first frame update
@@ -128,8 +137,6 @@ public class CodepTarget : MonoBehaviour
             //Fire
             CanFire();
 
-
-
             // case one - P2 is there, rightPlace is there - both 
             // right place is there, p2 is not
             // right place and p2 not there. 
@@ -158,7 +165,6 @@ public class CodepTarget : MonoBehaviour
             }
             else if (P2Held && rightPlace) { LevelTracker.CodepScore(false); }
             else if (P1Held && rightPlace) { LevelTracker.CodepScore(false); }
-
 
 
         }
@@ -210,12 +216,6 @@ public class CodepTarget : MonoBehaviour
         }
 
 
-
-
-
-
-
-
         // Check if it's within a few seconds of button being hit
         if (coolDownTimer1 > 0)
         {
@@ -235,14 +235,8 @@ public class CodepTarget : MonoBehaviour
 
 
     }
+   
     void CheckHits() {
-
-
-
-
-
-
-
 
 
 
@@ -250,9 +244,8 @@ public class CodepTarget : MonoBehaviour
         {
             
             CameraShaker.Presets.Explosion2D();
-            Debug.Log("BOTHPRESS");
-            P1Press = false;
-            P2Press = false;
+      
+       
                 if (rightPlace)
                 {
                     both.SetTrigger("Blink");
@@ -260,24 +253,28 @@ public class CodepTarget : MonoBehaviour
                 LevelTracker.CodepScore(true);
                 both.GetComponent<BothTarget>().hitIt = false;
                 P1Face.ChangeFace("kissy");
-                P2Face.ChangeFace("kissy");
 
+       
 
 
             } else { LevelTracker.CodepScore(false);
                 both.SetTrigger("Miss");
                 PlayRandomAudio(missSFX);
                 CameraShaker.Presets.ShortShake2D();
+           
             }
-            }
+
+            P1Press = false;
+            P2Press = false;
+        }
         else if (P1Press && coolDownTimer2 < 0)
         {
             CameraShaker.Presets.ShortShake2D();
-            Debug.Log("P1 Miss");
+     
             P1Press = false;
             PlayRandomAudio(P1HitSFX);
             coolDownTimer1 = coolDown;
-
+ 
             waitToFire1 = timeBetweenFires;
             blue.SetTrigger("Blink");
             LevelTracker.CodepScore(false);
@@ -285,13 +282,14 @@ public class CodepTarget : MonoBehaviour
         else if (P2Press && coolDownTimer1 < 0)
         {
             CameraShaker.Presets.ShortShake2D();
-            Debug.Log("P2Miss");
+       
             P2Press = false;
             coolDownTimer2 = coolDown;
             yellow.SetTrigger("Blink");
             waitToFire2 = timeBetweenFires;
             LevelTracker.CodepScore(false);
             PlayRandomAudio(P2HitSFX);
+        
         }
     }
 
@@ -317,6 +315,7 @@ public class CodepTarget : MonoBehaviour
             {
                 Move();
             }
+     
             CheckMatchingClick();
             CheckHits();
 

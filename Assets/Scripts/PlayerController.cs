@@ -99,7 +99,7 @@ public class PlayerController : MonoBehaviour
             if (Input.GetButtonDown(fireKey))
             {
                 
-                Debug.Log("hit the fire button");
+              //  Debug.Log("hit the fire button");
                 if (canFire)
                 {
                     LevelTracker.TextJump("elBlinko, P2: " + isP2, "big");
@@ -140,7 +140,9 @@ public class PlayerController : MonoBehaviour
         if (LevelTracker.GetLevel() == "bliss")
         { blissChamber.NextProjectile(); }
         else if (LevelTracker.levelGlobal != "hell")
-        { chamber.LastProjectile(); }
+        { chamber.LastProjectile();
+   
+        }
     }
 
     void NextProjectile()
@@ -148,7 +150,9 @@ public class PlayerController : MonoBehaviour
         if (LevelTracker.GetLevel() == "bliss")
         { blissChamber.NextProjectile(); }
         else if (LevelTracker.levelGlobal != "hell")
-        { chamber.NextProjectile(); }
+        { chamber.NextProjectile();
+
+        }
 
     }
 
@@ -198,7 +202,7 @@ public class PlayerController : MonoBehaviour
         GameObject bullet = Instantiate(Bullet(), new Vector3(this.transform.position.x + offset * projDir
             , this.transform.position.y + 0.5f, this.transform.position.z), Quaternion.identity);
 
-        float speed = bullet.GetComponent<Projectile>().speed;
+        float speed = bullet.GetComponent<ProjIce>().speed;
         if (isP2)
         {
             bullet.GetComponent<SpriteRenderer>().flipX = true;

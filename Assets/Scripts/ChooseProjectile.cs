@@ -8,12 +8,13 @@ using UnityEngine.EventSystems;
 public class ChooseProjectile : MonoBehaviour
 {
     public List<ScriptableObject> projectiles;
+    public List<GameObject> projectilesFab;
     public int currentInt;
     int nextInt;
     int lastInt;
-    public ScriptableObject current;
-    public ScriptableObject next;
-    public ScriptableObject last;
+    public GameObject current;
+    public GameObject next;
+    public GameObject last;
     
     public RawImage currentImage;
     public RawImage lastImage;
@@ -35,8 +36,9 @@ public class ChooseProjectile : MonoBehaviour
     void Start()
     {
         currentInt = 1;
-        current = projectiles[currentInt];
-        UpdateProjectiles();
+      //  current = projectiles[currentInt];
+        preCurrent = preIce;
+       // UpdateProjectiles();
     }
 
     // Update is called once per frame
@@ -45,47 +47,52 @@ public class ChooseProjectile : MonoBehaviour
 
     }
 
+    public int CycleScriptableList(int locInt, List<GameObject> list)
+    {
+        if (locInt > list.Count - 1)
+        { locInt = 0; }
+        else if (locInt < 0)
+        { locInt = list.Count - 1; }
+
+ 
+
+        return locInt;
+    }
+    
+
+
+
+
     public void LastProjectile()
     {
-        currentInt = CycleScriptableList(currentInt += 1, projectiles);
+        currentInt = CycleScriptableList(currentInt += 1, projectilesFab);
         UpdateProjectiles();
+  
     }
 
     public void NextProjectile()
     {
-        currentInt = CycleScriptableList(currentInt -= 1, projectiles);
+        currentInt =  CycleScriptableList(currentInt -= 1, projectilesFab);
         UpdateProjectiles();
+
+
     } 
 
-int CycleScriptableList(int locInt, List<ScriptableObject> list)
-    {
-        if (locInt > list.Count-1)
-        { locInt = 0; }
-        else if (locInt < 0)
-        { locInt = list.Count-1; }
-      
-
-        return locInt;
-    }
 
     void UpdateProjectiles()
     {
 
         // Objects
-       current = projectiles[currentInt];
-        next = projectiles[CycleScriptableList(currentInt + 1, projectiles)];
-        last = projectiles[CycleScriptableList(currentInt - 1, projectiles)];
-
-        // Images
-        tempDisplayProj.text = current.name;
+        current = projectilesFab[currentInt];
+        next = projectilesFab[CycleScriptableList(currentInt + 1, projectilesFab)];
+        last = projectilesFab[CycleScriptableList(currentInt - 1, projectilesFab)];
 
 
-        //currentImage.GetComponent<RawImage>().texture = current.
-        //lastImage;
-        //nextImage;
 
-
-     
+        if (current != null)
+            Debug.Log("projectile:" + current.name);
+        else
+            Debug.Log("projectile is null");
 
 
 
@@ -98,7 +105,7 @@ int CycleScriptableList(int locInt, List<ScriptableObject> list)
             currentImage.GetComponent<RawImage>().texture = Ask;
             lastImage.GetComponent<RawImage>().texture = Ice;
         }
-        else if (current.name == "Cold")
+        else if (current.name == "iceCube")
         {  preCurrent = preIce;
             nextImage.GetComponent<RawImage>().texture = Ask;
             currentImage.GetComponent<RawImage>().texture = Ice;
@@ -116,6 +123,7 @@ int CycleScriptableList(int locInt, List<ScriptableObject> list)
 
 
         }
+        else { Debug.Log("Brokem"); }
 
     }
 }

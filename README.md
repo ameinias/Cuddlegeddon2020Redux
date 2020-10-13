@@ -23,3 +23,8 @@ Cuddlegeddon: Snugglepocalypse is the 2020 remake of the 2012 game Cuddlegeddon,
   
 
 #Unitypackage
+https://drive.google.com/open?id=1ZkAmUNooxo3bc-oEaTimS1Hsek5PlfZf
+
+#Inputs  
+If you use the unitypackage, copy this into the ProjectSettings folder.
+https://drive.google.com/open?id=1ZjtaAhTPH7-mZL8Jz0RaGryS0xVnz9x3
