@@ -326,13 +326,13 @@ MonoBehaviour:
   P2Held: 0
   canFire1: 0
   canFire2: 0
-  coolDownTimer1: 1
-  coolDownTimer2: 1
+  coolDownTimer1: 0
+  coolDownTimer2: 0
   coolDown: 0.05
   startLoc: {fileID: 1880648125}
   rightPlace: 0
   endPosition: {x: 0, y: 0, z: 0}
-  offset: 0.8
+  offset: 5
   indexNode: 0
   movementSpeed: 3
   pressTimer: 0.8

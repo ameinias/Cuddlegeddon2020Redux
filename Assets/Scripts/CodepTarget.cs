@@ -13,8 +13,8 @@ public class CodepTarget : MonoBehaviour
     public Animator blue;
     public Animator yellow;
     public Animator both;
-    public bool P1Held;
-    public bool P2Held;
+/*    public bool P1Held;
+    public bool P2Held;*/
     public bool canFire1;
     public bool canFire2;
     public float coolDownTimer1;
@@ -28,15 +28,12 @@ public class CodepTarget : MonoBehaviour
     public float movementSpeed;
     public float pressTimer = 2;
     [Space(10)]
-    public int sucesses;
-
     bool timer;
     public bool P1Press;
     public bool P2Press;
     public float waitToFire1;
     public float waitToFire2;
-    public bool CanFire1;
-    public bool CanFire2;
+
     public float timeBetweenFires;
     [Space(10)]
     public AudioClip hitSFX;
@@ -61,8 +58,8 @@ public class CodepTarget : MonoBehaviour
     void Start()
     {
         endPosition.z = this.transform.position.z;
-        sucesses = 0;
-    }
+
+}
 
     public void PlayRandomAudio(AudioClip[] list)
     {
@@ -77,9 +74,9 @@ public class CodepTarget : MonoBehaviour
 
     IEnumerator P1Holder()
     {
-         P1Held = true;
+      //   P1Held = true;
         yield return new WaitForSeconds(pressTimer);
-        P1Held = false;
+     //   P1Held = false;
         coolDownTimer1 = coolDown;
         yield break;
 
@@ -87,9 +84,9 @@ public class CodepTarget : MonoBehaviour
 
     IEnumerator P2Holder()
     {
-        P2Held = true;
+       // P2Held = true;
         yield return new WaitForSeconds(pressTimer);
-        P2Held = false;
+     ///   P2Held = false;
         coolDownTimer2 = coolDown;
         yield break;
 
@@ -117,9 +114,10 @@ public class CodepTarget : MonoBehaviour
         }
     }
 
-
+/*
     void OldUpdate() {
 
+        Debug.Log("Here");
         if (!GameManager.IsPaused() && !GameManager.IsControlsDisabled())
         {
 
@@ -158,6 +156,7 @@ public class CodepTarget : MonoBehaviour
                 both.SetTrigger("Blink");
                 LevelTracker.CodepScore(true);
                 canFire1 = false;
+                canFire2 = false;
                 P2Held = false;
                 P1Held = false;
 
@@ -168,11 +167,11 @@ public class CodepTarget : MonoBehaviour
 
 
         }
-    
-    
+
+
     }
 
-
+*/
 
 
     void CheckMatchingClick() {
@@ -181,38 +180,50 @@ public class CodepTarget : MonoBehaviour
         if (waitToFire1 > 0)
         {
             waitToFire1 -= Time.deltaTime;
+            canFire1 = false;
         }
         else
         {
-            CanFire1 = true;
+            canFire1 = true;
         }
 
 
         if (waitToFire2 > 0)
         {
             waitToFire2 -= Time.deltaTime;
+            canFire2 = false;
         }
         else
         {
-            CanFire2 = true;
+           canFire2 = true;
         }
+ /*       if (Input.GetButtonDown("Fire1") && CanFire1)
+        {
+            P1Press = true;
+            Debug.Log("save the beanddddds");
+            coolDownTimer1 = coolDown;
+        }*/
 
-
-        // CHeck if button is hit
-        if (Input.GetButtonDown("Fire1") && coolDownTimer1 < 0 && CanFire1)
+            // CHeck if button is hit
+            if (Input.GetButtonDown("Fire1") && canFire1)
         {
             P1Press = true;
             coolDownTimer1 = coolDown;
-            CanFire1 = false;
+           canFire1 = false;
             P1Face.ChangeFace("shoot");
-
+ 
         }
-        if (Input.GetButtonDown("Fire2") && coolDownTimer2 < 0)
+
+
+
+
+        if (Input.GetButtonDown("Fire2") && canFire2)
         {
             P2Press = true;
             coolDownTimer2 = coolDown;
-            CanFire2 = false;
+            canFire2 = false;
             P2Face.ChangeFace("shoot");
+
         }
 
 
@@ -240,56 +251,67 @@ public class CodepTarget : MonoBehaviour
 
 
 
-            if (P1Press && P2Press)
+        if (P1Press && P2Press)
         {
-            
+
             CameraShaker.Presets.Explosion2D();
-      
-       
-                if (rightPlace)
-                {
-                    both.SetTrigger("Blink");
+            P1Press = false;
+            P2Press = false;
+
+            if (rightPlace)
+            {
+                both.SetTrigger("Blink");
                 PlayRandomAudio(matchSFX);
                 LevelTracker.CodepScore(true);
                 both.GetComponent<BothTarget>().hitIt = false;
                 P1Face.ChangeFace("kissy");
+                P2Face.ChangeFace("kissy");
+                Debug.Log("BOTH");
 
-       
 
-
-            } else { LevelTracker.CodepScore(false);
+            }
+            else
+            {
+                LevelTracker.CodepScore(false);
                 both.SetTrigger("Miss");
                 PlayRandomAudio(missSFX);
                 CameraShaker.Presets.ShortShake2D();
-           
+
             }
 
-            P1Press = false;
-            P2Press = false;
+
         }
-        else if (P1Press && coolDownTimer2 < 0)
+        else
         {
-            CameraShaker.Presets.ShortShake2D();
-     
-            P1Press = false;
-            PlayRandomAudio(P1HitSFX);
-            coolDownTimer1 = coolDown;
- 
-            waitToFire1 = timeBetweenFires;
-            blue.SetTrigger("Blink");
-            LevelTracker.CodepScore(false);
-        }
-        else if (P2Press && coolDownTimer1 < 0)
-        {
-            CameraShaker.Presets.ShortShake2D();
-       
-            P2Press = false;
-            coolDownTimer2 = coolDown;
-            yellow.SetTrigger("Blink");
-            waitToFire2 = timeBetweenFires;
-            LevelTracker.CodepScore(false);
-            PlayRandomAudio(P2HitSFX);
-        
+
+            if (P1Press && coolDownTimer2 < 0)
+            {
+                CameraShaker.Presets.ShortShake2D();
+
+                P1Press = false;
+                PlayRandomAudio(P1HitSFX);
+                coolDownTimer1 = coolDown;
+
+                waitToFire1 = timeBetweenFires;
+                blue.SetTrigger("Blink");
+
+                LevelTracker.CodepScore(false);
+            }
+            if (P2Press && coolDownTimer1 < 0)
+            {
+                CameraShaker.Presets.ShortShake2D();
+
+                P2Press = false;
+                PlayRandomAudio(P2HitSFX);
+                coolDownTimer2 = coolDown;
+
+                waitToFire2 = timeBetweenFires;
+                yellow.SetTrigger("Blink");
+
+                LevelTracker.CodepScore(false);
+
+
+            }
         }
     }
 
@@ -311,59 +333,25 @@ public class CodepTarget : MonoBehaviour
             }
             else { rightPlace = false; }
 
-            if (CanFire1 && CanFire2 && both.GetComponent<BothTarget>().hitIt)
+            if (canFire1 && canFire2 && both.GetComponent<BothTarget>().hitIt)
             {
                 Move();
             }
      
             CheckMatchingClick();
             CheckHits();
-
+    
 
         }
     }
 
 
-
-
-    // Update is called once per frame
-    void UpdateOLD()
-    {
-
-        var zPressed = Input.GetButton("Fire1"); // note, not keydown
-        var xPressed = Input.GetButton("Fire2");
-        coolDownTimer1 += Time.deltaTime;
-
-        if (!timer && (zPressed || xPressed))
-        {
-            timer = true;
-           // coolDown = Time.deltaTime;
-            Debug.Log("reset timer");
-            coolDownTimer1 = 0;
-        }
-
-        if (timer &&  coolDownTimer1 > 100) // 100 ms
-        {
-            timer = false;
-            if (zPressed && xPressed)
-                Debug.Log("Pressed Both");
-            else if (zPressed)
-                Debug.Log("Pressed Z");
-            else if (xPressed)
-                Debug.Log("Pressed X");
-            else
-                Debug.Log("Released keys during timer");
-        }
-        Debug.Log("Blob retired");
-
-
-    }
 
 
 
     void CheckFire()
     {
-        if (Input.GetButtonDown("Fire1") && canFire1)
+/*        if (Input.GetButtonDown("Fire1") && canFire1)
         {
 
             if (rightPlace)
@@ -433,7 +421,7 @@ public class CodepTarget : MonoBehaviour
 
 
 
-        }
+        }*/
     }
     public void Move()
     {
