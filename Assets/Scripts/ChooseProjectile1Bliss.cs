@@ -36,15 +36,10 @@ public class ChooseProjectile1Bliss : MonoBehaviour
     {
         currentInt = 1;
         current = projectiles[currentInt];
-        UpdateProjectiles();
+    //    UpdateProjectiles();
         
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 
     public  void LastProjectile()
     {
@@ -78,8 +73,12 @@ int CycleScriptableList(int locInt, List<GameObject> list)
         last = projectiles[CycleScriptableList(currentInt - 1, projectiles)];
 
 
+        if (current != null)
+            Debug.Log("projectile:" + current.name);
+        else
+            Debug.Log("projectile is null");
 
-        if (current.name == "Cold")
+        if (current.name == "iceCube")
         {
             preCurrent = preIce;
             nextImage.GetComponent<RawImage>().texture = Heart;

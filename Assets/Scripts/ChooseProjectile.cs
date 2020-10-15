@@ -41,11 +41,7 @@ public class ChooseProjectile : MonoBehaviour
        // UpdateProjectiles();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
 
-    }
 
     public int CycleScriptableList(int locInt, List<GameObject> list)
     {

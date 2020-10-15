@@ -144,6 +144,9 @@ public bool noTimer;
     public List<string> goodText;
     public List<string> badText;
 
+    public List<string> monsterHealText;
+    public List<string> monsterHitText;
+
 
     public static void TextJump(string text, string size)
     {
@@ -592,7 +595,9 @@ public static AudioClip LevelBGMusic()
 
         }
         else if (player == "P2")
-        { singleton.P2Head.ChangeFace(face); } else if (player == "monster") { singleton.Baddie.ChangeFace(face); }
+        { singleton.P2Head.ChangeFace(face); } else if (player == "monster") { singleton.Baddie.ChangeFace(face);
+          
+        }
         else { Debug.Log("You are trying to elicite a reaction from a non-existant person."); }
 
     }
@@ -617,18 +622,45 @@ public static AudioClip LevelBGMusic()
             { textSize = "small";  } 
             else { textSize = "big"; }
 
-
+         //   Debug.Log(player);
             if (rando < 2) {
             if (damageValue > 0)
             {
-                textRando = Random.Range(0, singleton.goodText.Count);
+              
 
-                LevelTracker.TextJump(singleton.goodText[textRando], textSize);
-            } else {
+                    if (player == "monster")
+                    {
+                        textRando = Random.Range(0, singleton.monsterHealText.Count);
+                        LevelTracker.TextJump(singleton.monsterHealText[textRando], textSize);
+                    }
+                    else
+                    {
+                        textRando = Random.Range(0, singleton.goodText.Count);
+                        LevelTracker.TextJump(singleton.goodText[textRando], textSize);
+                    }
 
-                textRando = Random.Range(0, singleton.badText.Count);
+                } else {
 
-                    LevelTracker.TextJump(singleton.badText[textRando], textSize); }
+                    if (player == "monster")
+                    {
+                        textRando = Random.Range(0, singleton.monsterHitText.Count);
+                        LevelTracker.TextJump(singleton.monsterHitText[textRando], textSize);
+
+                       
+                    }
+                    else
+                    {
+                        textRando = Random.Range(0, singleton.badText.Count);
+                        LevelTracker.TextJump(singleton.badText[textRando], textSize);
+                    }
+                }
+
+
+
+
+
+
+
         }
     }
 
@@ -929,13 +961,13 @@ else { return "broken"; }
             {
 
                 singleton.P1HealthBar.GainHealth(damageValue);
-                Debug.Log("Hit P1");
+ 
             }
             else
             {
 
                 singleton.BlissDefeated("P1");
-                Debug.Log("P1 DEAD");
+        
             }
 
         }
@@ -947,13 +979,13 @@ else { return "broken"; }
 
                 singleton.P2HealthBar.GainHealth(damageValue);
 
-                Debug.Log("hitP2  THIS ONE is over updating");
+ 
             }
             else
             {
                 singleton.BlissDefeated("P2");
 
-                Debug.Log("P2 DEAD");
+
             }
         }
 
@@ -968,7 +1000,7 @@ else { return "broken"; }
             {
                 singleton.BlissDefeated("monster");
 
-                Debug.Log("MONSTERDEAD");
+ 
             }
 
 

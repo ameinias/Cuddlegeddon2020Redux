@@ -54,7 +54,7 @@ public class MonsterMove : MonoBehaviour
 
 
     public void Shoot() {
-        Debug.Log("Shoot!");
+  //      Debug.Log("Shoot!");
         shootTimer = Random.Range(minFire, maxFire);
         timer = shootTimer;
         player.PlayOneShot(monsterShootSFX);
@@ -67,7 +67,10 @@ public class MonsterMove : MonoBehaviour
     {
 
         chance = Random.Range(0, 2);
-        if (chance == 0) { projDir = 1; Debug.Log("right" + chance); } else { projDir = -1; Debug.Log("left" + chance); }
+        if (chance == 0) { projDir = 1; //Debug.Log("right" + chance); 
+        } else { projDir = -1;
+            //Debug.Log("left" + chance); 
+        }
 
         GameObject bullet = Instantiate(projPrefab, new Vector3(this.transform.position.x + offset * projDir
             , this.transform.position.y + 0.5f, this.transform.position.z), Quaternion.identity);

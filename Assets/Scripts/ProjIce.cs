@@ -205,7 +205,7 @@ public class ProjIce : MonoBehaviour
         {
             ChooseClip("monster");
 
-            Debug.Log("hit monster");
+          
             LevelTracker.UpdateScore("monster", damage);
             KillProj();
             LevelTracker.Express(reaction[index], "monster");
@@ -214,7 +214,7 @@ public class ProjIce : MonoBehaviour
         else
         {
 
-            Debug.Log("HIT SOMETHING MYSTERIOUS");
+            
 
 
         }

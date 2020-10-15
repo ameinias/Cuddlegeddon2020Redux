@@ -77,7 +77,7 @@ public class HeadController : MonoBehaviour
 
         // input = PickSprite(input);
 
-
+    //    Debug.Log(  gameObject.name + "- change that face: " + input);
 
         sprite.sprite = PickSprite(input);
         timer = countdownSec;

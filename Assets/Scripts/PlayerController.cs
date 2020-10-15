@@ -44,6 +44,8 @@ public class PlayerController : MonoBehaviour
 
     public GameObject blink;
     public GameObject blink2;
+    public List<AudioClip> shootClips;
+
 
 
     // Start is called before the first frame update
@@ -78,6 +80,19 @@ public class PlayerController : MonoBehaviour
             sprite.sprite = origSprite;
         }
     }
+
+    public void ChooseClip(List<AudioClip> list)
+    {
+
+
+
+
+        int index = Random.Range(0, list.Count);
+        AudioClip hitSFX = list[index];
+        GetComponent<AudioSource>().PlayOneShot(hitSFX);
+
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -93,131 +108,133 @@ public class PlayerController : MonoBehaviour
             //Fire
             CanFire();
 
-     
+
 
 
             if (Input.GetButtonDown(fireKey))
             {
-                
-                Debug.Log("hit the fire button");
+
+                //    Debug.Log("hit the fire button");
                 if (canFire)
                 {
-                 //   LevelTracker.TextJump("elBlinko, P2: " + isP2, "big");
+                    //   LevelTracker.TextJump("elBlinko, P2: " + isP2, "big");
                     FireProjectile();
-                    audioS.PlayOneShot(hitColdSFX);
+                    ChooseClip(shootClips);
                 }
-
-            } else {
-                //blink.SetActive(false);
             }
+
+
+
+
+
+                if (LevelTracker.GetLevel() != "hell")
+                {
+                //    Debug.Log("Hey u");
+                    // Switch Projectile
+                    if (Input.GetButtonDown(projUpKey))
+                    {
+                        LastProjectile();
+                        audioS.PlayOneShot(beep1SFX);
+                        //  LevelTracker.TextJump("change1, P2: " + isP2, "small");
+                    }
+                    else if (Input.GetButtonDown(projDownKey))
+                    {
+                        NextProjectile();
+                         // LevelTracker.TextJump("change2, P2: " + isP2, "small");
+                        audioS.PlayOneShot(beep2SFX);
+                    }
+                }
             
+        }
 
+    }
 
-            if (LevelTracker.GetLevel() != "hell")
+        void LastProjectile()
+        {
+
+            if (LevelTracker.GetLevel() == "bliss")
+            { blissChamber.NextProjectile(); }
+            else if (LevelTracker.levelGlobal != "hell")
             {
-                // Switch Projectile
-                if (Input.GetButtonDown(projUpKey))
-                {
-                    LastProjectile();
-                    audioS.PlayOneShot(beep1SFX);
-                  //  LevelTracker.TextJump("change1, P2: " + isP2, "small");
-                }
-                else if (Input.GetButtonDown(projDownKey))
-                {
-                    NextProjectile();
-                  //  LevelTracker.TextJump("change2, P2: " + isP2, "small");
-                    audioS.PlayOneShot(beep2SFX);
-                }
+                chamber.LastProjectile();
+
             }
         }
-    }
 
-
-
-    void LastProjectile()
-    {
-
-        if (LevelTracker.GetLevel() == "bliss")
-        { blissChamber.NextProjectile(); }
-        else if (LevelTracker.levelGlobal != "hell")
-        { chamber.LastProjectile();
-   
-        }
-    }
-
-    void NextProjectile()
-    {
-        if (LevelTracker.GetLevel() == "bliss")
-        { blissChamber.NextProjectile(); }
-        else if (LevelTracker.levelGlobal != "hell")
-        { chamber.NextProjectile();
-
-        }
-
-    }
-
-    GameObject Bullet()
-    {
-
-        GameObject projectileToFire;
-
-
-        if (LevelTracker.GetLevel() == "bliss")
+        void NextProjectile()
         {
-            projectileToFire = blissChamber.preCurrent;
-            Debug.Log(blissChamber.preCurrent.name + " bliss");
+            if (LevelTracker.GetLevel() == "bliss")
+            { blissChamber.NextProjectile(); }
+            else if (LevelTracker.levelGlobal != "hell")
+            {
+                chamber.NextProjectile();
+
+            }
+
         }
 
-        else if (LevelTracker.levelGlobal == "hell")
-        {
-            projectileToFire = projectile;
-            Debug.Log(projectile.name + " hell");
-
-        }
-        else if (LevelTracker.levelGlobal == "vanilla")
+        GameObject Bullet()
         {
 
-            projectileToFire = chamber.preCurrent;
+            GameObject projectileToFire;
 
+
+            if (LevelTracker.GetLevel() == "bliss")
+            {
+                projectileToFire = blissChamber.preCurrent;
+             //   Debug.Log(blissChamber.preCurrent.name + " bliss");
+            }
+
+            else if (LevelTracker.levelGlobal == "hell")
+            {
+                projectileToFire = projectile;
+            //    Debug.Log(projectile.name + " hell");
+
+            }
+            else if (LevelTracker.levelGlobal == "vanilla")
+            {
+
+                projectileToFire = chamber.preCurrent;
+
+            }
+            else
+            {
+
+                projectileToFire = chamber.preCurrent;
+          //      Debug.Log(chamber.preCurrent.name + " else");
+            }
+
+
+
+            return projectileToFire;
         }
-        else
+
+        public void FireProjectile()
         {
+            sprite.sprite = handBlast;
 
-            projectileToFire = chamber.preCurrent;
-            Debug.Log(chamber.preCurrent.name + " else");
+            canFire = false;
+
+
+            GameObject bullet = Instantiate(Bullet(), new Vector3(this.transform.position.x + offset * projDir
+                , this.transform.position.y + 0.5f, this.transform.position.z), Quaternion.identity);
+
+            float speed = bullet.GetComponent<ProjIce>().speed;
+            if (isP2)
+            {
+                bullet.GetComponent<SpriteRenderer>().flipX = true;
+            }
+
+            bullet.GetComponent<Rigidbody>().AddForce(new Vector3(speed * projDir, 0, 0)); // 
+
+            audioS.PlayOneShot(shootSFX);
+
+
         }
 
 
 
-        return projectileToFire;
-    }
 
-    public void FireProjectile()
-    {
-        sprite.sprite = handBlast;
-
-        canFire = false;
-
-
-        GameObject bullet = Instantiate(Bullet(), new Vector3(this.transform.position.x + offset * projDir
-            , this.transform.position.y + 0.5f, this.transform.position.z), Quaternion.identity);
-
-        float speed = bullet.GetComponent<ProjIce>().speed;
-        if (isP2)
-        {
-            bullet.GetComponent<SpriteRenderer>().flipX = true;
-        }
-
-        bullet.GetComponent<Rigidbody>().AddForce(new Vector3(speed * projDir, 0, 0)); // 
-
-        audioS.PlayOneShot(shootSFX);
 
 
     }
-
-
-
-
-
-
-}
