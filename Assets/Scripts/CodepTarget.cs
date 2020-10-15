@@ -210,7 +210,7 @@ public class CodepTarget : MonoBehaviour
             P1Press = true;
             coolDownTimer1 = coolDown;
            canFire1 = false;
-            P1Face.ChangeFace("shoot");
+            P1Face.ChangeFace("shoot",25f);
  
         }
 
@@ -222,7 +222,7 @@ public class CodepTarget : MonoBehaviour
             P2Press = true;
             coolDownTimer2 = coolDown;
             canFire2 = false;
-            P2Face.ChangeFace("shoot");
+            P2Face.ChangeFace("shoot",25f);
 
         }
 
@@ -255,8 +255,7 @@ public class CodepTarget : MonoBehaviour
         {
 
             CameraShaker.Presets.Explosion2D();
-            P1Press = false;
-            P2Press = false;
+
 
             if (rightPlace)
             {
@@ -264,8 +263,8 @@ public class CodepTarget : MonoBehaviour
                 PlayRandomAudio(matchSFX);
                 LevelTracker.CodepScore(true);
                 both.GetComponent<BothTarget>().hitIt = false;
-                P1Face.ChangeFace("kissy");
-                P2Face.ChangeFace("kissy");
+                P1Face.ChangeFace("kissy", 30f);
+                P2Face.ChangeFace("kissy",30f);
                 Debug.Log("BOTH");
 
 
@@ -278,13 +277,14 @@ public class CodepTarget : MonoBehaviour
                 CameraShaker.Presets.ShortShake2D();
 
             }
-
+            P1Press = false;
+            P2Press = false;
 
         }
         else
         {
 
-            if (P1Press && coolDownTimer2 < 0)
+            if (P1Press && coolDownTimer1 < 0)
             {
                 CameraShaker.Presets.ShortShake2D();
 
@@ -296,8 +296,13 @@ public class CodepTarget : MonoBehaviour
                 blue.SetTrigger("Blink");
 
                 LevelTracker.CodepScore(false);
+
+                if (P2Press == false)
+                {
+                    P2Face.ChangeFace("rage2");
+                }
             }
-            if (P2Press && coolDownTimer1 < 0)
+            if (P2Press && coolDownTimer2 < 0)
             {
                 CameraShaker.Presets.ShortShake2D();
 
@@ -309,6 +314,10 @@ public class CodepTarget : MonoBehaviour
                 yellow.SetTrigger("Blink");
 
                 LevelTracker.CodepScore(false);
+                if (P1Press == false)
+                {
+                    P1Face.ChangeFace("rage2");
+                }
 
 
             }

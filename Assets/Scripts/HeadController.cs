@@ -71,15 +71,16 @@ public class HeadController : MonoBehaviour
     }
 
     // Update is called once per frame
-    public void ChangeFace(string input)
+    public void ChangeFace(string input, float facetimer = 0)
     {
-
+        if (facetimer == 0)
+        { facetimer = countdownSec;  }
 
         // input = PickSprite(input);
 
     //    Debug.Log(  gameObject.name + "- change that face: " + input);
 
         sprite.sprite = PickSprite(input);
-        timer = countdownSec;
+        timer = facetimer;
     }
 }
