@@ -2290,6 +2290,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 612443239703344470, guid: f706997fdb425ad43b785710a47898e2,
         type: 3}
+      propertyPath: shootClips.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 612443239703344470, guid: f706997fdb425ad43b785710a47898e2,
+        type: 3}
       propertyPath: chamber
       value: 
       objectReference: {fileID: 1947779545}
@@ -2309,6 +2314,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 9036728276799471357, guid: 93d121523ea288e449c2689587f27f19,
         type: 3}
+    - target: {fileID: 612443239703344470, guid: f706997fdb425ad43b785710a47898e2,
+        type: 3}
+      propertyPath: shootClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 0153999cbbf01624f8146dc61188a10a, type: 3}
+    - target: {fileID: 612443239703344470, guid: f706997fdb425ad43b785710a47898e2,
+        type: 3}
+      propertyPath: shootClips.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 76c4c0fff737ebe4499f0d6e3e16e709, type: 3}
     - target: {fileID: 612443239848089288, guid: f706997fdb425ad43b785710a47898e2,
         type: 3}
       propertyPath: countdownSec
@@ -2396,6 +2411,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 623786817, guid: fc5ea3e9f7cbfd34cbcd8449b828e473, type: 3}
+      propertyPath: goodText.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 623786817, guid: fc5ea3e9f7cbfd34cbcd8449b828e473, type: 3}
+      propertyPath: badText.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 623786817, guid: fc5ea3e9f7cbfd34cbcd8449b828e473, type: 3}
       propertyPath: level
       value: hell
       objectReference: {fileID: 0}
@@ -2435,6 +2458,30 @@ PrefabInstance:
       propertyPath: debugText
       value: 
       objectReference: {fileID: 8116901544422012252}
+    - target: {fileID: 623786817, guid: fc5ea3e9f7cbfd34cbcd8449b828e473, type: 3}
+      propertyPath: badText.Array.data[0]
+      value: destroy them!
+      objectReference: {fileID: 0}
+    - target: {fileID: 623786817, guid: fc5ea3e9f7cbfd34cbcd8449b828e473, type: 3}
+      propertyPath: badText.Array.data[1]
+      value: win
+      objectReference: {fileID: 0}
+    - target: {fileID: 623786817, guid: fc5ea3e9f7cbfd34cbcd8449b828e473, type: 3}
+      propertyPath: badText.Array.data[2]
+      value: fight
+      objectReference: {fileID: 0}
+    - target: {fileID: 623786817, guid: fc5ea3e9f7cbfd34cbcd8449b828e473, type: 3}
+      propertyPath: badText.Array.data[3]
+      value: inflict harm
+      objectReference: {fileID: 0}
+    - target: {fileID: 623786817, guid: fc5ea3e9f7cbfd34cbcd8449b828e473, type: 3}
+      propertyPath: badText.Array.data[4]
+      value: brutal
+      objectReference: {fileID: 0}
+    - target: {fileID: 623786817, guid: fc5ea3e9f7cbfd34cbcd8449b828e473, type: 3}
+      propertyPath: goodText.Array.data[0]
+      value: that's weird
+      objectReference: {fileID: 0}
     - target: {fileID: 655315593, guid: fc5ea3e9f7cbfd34cbcd8449b828e473, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -3707,6 +3754,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9210058944215452090, guid: 808e7606873e7834088139c3cc0868fa,
         type: 3}
+      propertyPath: shootClips.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9210058944215452090, guid: 808e7606873e7834088139c3cc0868fa,
+        type: 3}
       propertyPath: chamber
       value: 
       objectReference: {fileID: 85438987}
@@ -3726,6 +3778,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 9036728276799471357, guid: 93d121523ea288e449c2689587f27f19,
         type: 3}
+    - target: {fileID: 9210058944215452090, guid: 808e7606873e7834088139c3cc0868fa,
+        type: 3}
+      propertyPath: shootClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: fd542291711386148baff6027d6dea62, type: 3}
+    - target: {fileID: 9210058944215452090, guid: 808e7606873e7834088139c3cc0868fa,
+        type: 3}
+      propertyPath: shootClips.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: edc44eacf40a38f409618eb9cc8d9959, type: 3}
     - target: {fileID: 9210058945684995264, guid: 808e7606873e7834088139c3cc0868fa,
         type: 3}
       propertyPath: countdownSec

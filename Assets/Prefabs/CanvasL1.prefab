@@ -3220,7 +3220,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 84.92, y: -53.44}
+  m_AnchoredPosition: {x: 84.92, y: -222.6}
   m_SizeDelta: {x: 151.75516, y: 140.2186}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3852155218962823213
@@ -3264,8 +3264,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Player One Passes Away Player Two Will Never Forget Them                   
-    Live Long In Love
+  m_Text: "Player One \nPasses Away \nPlayer Two Will\nNever Forget Them \n Live
+    Long In Love"
 --- !u!1 &4282151015494926215
 GameObject:
   m_ObjectHideFlags: 0
@@ -7793,7 +7793,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4509709467844165126
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8352,8 +8352,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Player Two Passes Away Player One Will Never Forget Them                   
-    Live Long In Love
+  m_Text: "Player Two \nPasses Away \nPlayer One Will Never \nForget Them\nLive Long
+    In Love"
 --- !u!1 &7889035162867623536
 GameObject:
   m_ObjectHideFlags: 0
@@ -9646,7 +9646,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &8116901545916192138
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10113,7 +10113,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2276450124000660931
 RectTransform:
   m_ObjectHideFlags: 0
