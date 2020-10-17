@@ -13,11 +13,10 @@ namespace AssetStoreImporter
 
 
         [MenuItem("Tools/AssetStore Importer", false, 80)]
-        [System.Obsolete]
         static void Open()
         {
-            var baby = GetWindow<ImporterWindow>();
-            baby.title = "Package Importer";
+            var window = GetWindow<ImporterWindow>();
+            window.title = "Package Importer";
         }
 
         private void OnGUI()

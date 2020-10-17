@@ -57,7 +57,7 @@ public class CodepTarget : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        endPosition.z = this.transform.position.z;
+        endPosition = startLoc.transform.position;
 
 }
 
@@ -434,7 +434,7 @@ public class CodepTarget : MonoBehaviour
     }
     public void Move()
     {
-
+       
         if (transform.position != endPosition)
         {
             transform.position = Vector3.MoveTowards(transform.position, endPosition, movementSpeed * Time.deltaTime);

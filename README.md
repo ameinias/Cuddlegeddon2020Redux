@@ -16,7 +16,9 @@ Cuddlegeddon: Snugglepocalypse is the 2020 remake of the 2012 game Cuddlegeddon,
 
 ## Known Bugs
  
-* Codep doesn't work
+* Ticker moves backwards
+* Canvas scale is wrong
+* Mute doesn't work
   
 
 #Unitypackage - out of date

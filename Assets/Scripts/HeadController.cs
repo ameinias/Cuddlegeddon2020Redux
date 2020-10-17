@@ -23,7 +23,7 @@ public class HeadController : MonoBehaviour
     {
         sprite = GetComponent<SpriteRenderer>();
         sprite.sprite = neutral;
-        countdownSec = countdownSec * 60;
+        countdownSec = countdownSec;// * 60;
 
     }
 
@@ -31,7 +31,7 @@ public class HeadController : MonoBehaviour
     {
     if (timer > 0)
         {
-            timer -= 1;
+            timer -= 1 * Time.deltaTime;
         } else { sprite.sprite = neutral; }
 
     // temp

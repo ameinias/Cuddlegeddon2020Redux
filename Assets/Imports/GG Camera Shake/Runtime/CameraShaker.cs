@@ -13,6 +13,8 @@ namespace CameraShake
 
         readonly List<ICameraShake> activeShakes = new List<ICameraShake>();
 
+        public GameObject shakeSeperate;
+
         [Tooltip("Transform which will be affected by the shakes.\n\nCameraShaker will set this transform's local position and rotation.")]
         [SerializeField]
         Transform cameraTransform;
@@ -83,7 +85,36 @@ namespace CameraShake
             }
             cameraTransform.localPosition = StrengthMultiplier * cameraDisplacement.position;
             cameraTransform.localRotation = Quaternion.Euler(StrengthMultiplier * cameraDisplacement.eulerAngles);
+            ShakeBG();
         }
+
+
+        private void ShakeBG()
+        {
+            if (shakeSeperate == null) return;
+
+            Displacement banana = new Displacement(transform.position, Vector3.zero);
+
+
+            Displacement bgDisplacement = banana; // Displacement.Zero;
+            for (int i = activeShakes.Count - 1; i >= 0; i--)
+            {
+                if (activeShakes[i].IsFinished)
+                {
+                    activeShakes.RemoveAt(i);
+                }
+                else
+                {
+                    activeShakes[i].Update(Time.deltaTime, cameraTransform.position, cameraTransform.rotation);
+                    bgDisplacement += activeShakes[i].CurrentDisplacement;
+                }
+            }
+            shakeSeperate.transform.localPosition = 2 * bgDisplacement.position;
+            shakeSeperate.transform.localRotation = Quaternion.Euler(2 * bgDisplacement.eulerAngles);
+        }
+
+
+
 
         private static bool IsInstanceNull()
         {

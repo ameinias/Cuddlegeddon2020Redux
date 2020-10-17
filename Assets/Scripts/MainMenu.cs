@@ -52,6 +52,12 @@ public class MainMenu : MonoBehaviour
         //    LoadB(1);
 
         //}
+
+        if (Input.GetButtonDown("Cancel"))
+        {
+            SceneManager.LoadScene("MainMenu");
+
+        }
     }
 
 

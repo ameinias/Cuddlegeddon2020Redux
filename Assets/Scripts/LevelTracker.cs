@@ -91,7 +91,7 @@ public class LevelTracker : MonoBehaviour
 
     public Text countDownTimer;
 
-
+    public bool finishedEverything = false;
     [Header("Menus")]
 
     public string nextLevel;
@@ -137,11 +137,12 @@ public class LevelTracker : MonoBehaviour
 
     [Space(10)]
     public Text debugText;
-
+    [Space(10)]
     public GameObject badHeartFab;
     public GameObject goodHeartFab;
     public GameObject badHeartparent;
     public GameObject goodHeartparent;
+    [Header("TextLists Mode")]
     public List<string> goodText;
     public List<string> badText;
 
@@ -185,6 +186,7 @@ public class LevelTracker : MonoBehaviour
         AllStart();
         levelGlobal = level;
         heckOver = false;
+        finishedEverything = false;
         if (level == "vanilla")
         {
             VanillaStart();
@@ -500,11 +502,17 @@ public class LevelTracker : MonoBehaviour
         {
             ;
 
-            if (finishedVanilla == true)
+ /*           if (finishedVanilla == true)
             {
                 if (Input.anyKeyDown)
                 { LoadB(nextLevel); }
-            }
+            }*/
+
+     /*       if (finishedEverything == true)
+            {
+                if (Input.anyKeyDown)
+                { LoadB("MainMenu"); }
+            }*/
 
 
         }
@@ -605,7 +613,7 @@ public class LevelTracker : MonoBehaviour
 
         healthBar.GainHealth(damage);
 
-        relDescText.text = PlayerSatisfaction(healthBar.health);
+      //  relDescText.text = PlayerSatisfaction(healthBar.health);
 
         if (healthBar.health <= -99)
             if (healthBar.health <= -99)
@@ -742,7 +750,7 @@ public class LevelTracker : MonoBehaviour
         }
 
         //Pause(true);
-        relDescText.text = relationshipResult;
+        //relDescText.text = relationshipResult;
         Time.timeScale = 0;
         if (PlayerSatisfaction(healthBar.health) == "fine")
         {
@@ -855,8 +863,8 @@ public class LevelTracker : MonoBehaviour
         GameManager.DisableControls(true);
         GameManager.HardMute();
         GetComponent<AudioSource>().PlayOneShot(blissWinSFX);
-
-
+        nextLevel = "MainMenu";
+        finishedEverything = true;
         if (player == "monster")
 
         { singleton.BlissWinScreen.SetActive(true); }
@@ -927,8 +935,8 @@ public class LevelTracker : MonoBehaviour
     {
         Time.timeScale = 0;
         GameManager.HardMute();
-
-
+        nextLevel = "MainMenu";
+        finishedEverything = true;
 
         if (player == "P1")
 
@@ -947,7 +955,7 @@ public class LevelTracker : MonoBehaviour
 
 
 
-
+  
 
 
 
@@ -972,6 +980,10 @@ public class LevelTracker : MonoBehaviour
 
             GameObject newHeart = Instantiate(singleton.goodHeartFab);
             newHeart.transform.SetParent(singleton.goodHeartparent.transform);
+         //  singleton.scaleChange = new Vector3(0.82375f, 0.82375f, 0.82375f);
+            newHeart.transform.localScale = new UnityEngine.Vector3(0.82375f, 0.82375f, 0.82375f);
+
+
 
             if (singleton.coDepWins > 9)
             {
@@ -997,6 +1009,8 @@ public class LevelTracker : MonoBehaviour
             GameObject newHeart = Instantiate(singleton.badHeartFab);
 
             newHeart.transform.SetParent(singleton.badHeartparent.transform);
+            newHeart.transform.localScale = new UnityEngine.Vector3(0.82375f, 0.82375f, 0.82375f);
+
 
             // singleton.disagreementText.text = "Disagreements: " + singleton.coDepFail;
 
@@ -1110,13 +1124,18 @@ public class LevelTracker : MonoBehaviour
         GetComponent<AudioSource>().PlayOneShot(coDepWinSFX);
         CodepWinScreen.SetActive(true);
         nextLevel = "MainMenu";
-
+        finishedEverything = true;
     }
 
     void EndLevelCoDep()
     {
+        Time.timeScale = 0;
+        GameManager.HardMute();
+        GetComponent<AudioSource>().PlayOneShot(coDepWinSFX);
         GameManager.DisableControls(true);
         singleton.CoDepLoseScreen.SetActive(true);
+        finishedEverything = true;
+        nextLevel = "MainMenu";
     }
 
 

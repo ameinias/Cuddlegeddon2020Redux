@@ -23,6 +23,10 @@ public class Learn : MonoBehaviour
         { Debug.Log("moving");
 
         }
+        if (Input.GetButtonDown("Cancel")){
+            SceneManager.LoadScene("MainMenu");
+
+        }
     }
 
     public void nextPanel(GameObject panel)
